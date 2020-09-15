@@ -1,0 +1,9 @@
+{% extends "mainfile.html" %}
+
+{%  block content %}
+    <p>Bad request</p>
+    <p>Error: {{ error_message.args }}. Method: {{ method }}.
+    Valid User form: {{ user_form.is_valid }}, SocialUser form{{ social_user_form.is_valid }}
+    </p>
+    {% include 'edit_data/includes/edit_form.html' %}
+{%  endblock %}

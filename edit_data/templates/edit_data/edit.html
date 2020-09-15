@@ -1,0 +1,11 @@
+{% extends "mainfile.html" %}
+
+{#{% load django_bootstrap_breadcrumbs %}#}
+{#{% block breadcrumbs %}#}
+{#    {% breadcrumb "Home" "/"  %}#}
+{#    {% breadcrumb "Edit" "edit/" %}#}
+{#{% endblock %}#}
+
+{% block content %}
+    {% include 'edit_data/includes/edit_form.html' %}
+{% endblock %}

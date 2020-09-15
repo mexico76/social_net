@@ -1,0 +1,25 @@
+<img src="{{ person.socialuser.main_photo.url }}"><br>
+<a href="{% url 'send_message' person.socialuser.user %}" class="btn btn-primary btn-sm">Write to
+    {{ person.socialuser.user.first_name }}</a><br>
+{{ person.username }}<br>
+{{ person.get_full_name }}<br>
+{% if person.socialuser.birth_date is not None %}
+    {{ person.socialuser.birth_date}}<br>
+{% else %}
+{% endif %}
+{% if person.socialuser.phone_number is not None %}
+    {{ person.socialuser.phone_number }}<br>
+{% else %}
+{% endif %}
+{% if person.socialuser.hobbies is not None %}
+    {{ person.socialuser.hobbies }}<br>
+{% else %}
+{% endif %}
+{% if person.socialuser.school is not None %}
+    {{ person.socialuser.school }}<br>
+{% else %}
+{% endif %}
+{% if person.socialuser.university is not None %}
+    {{ person.socialuser.university }}<br>
+{% else %}
+{% endif %}

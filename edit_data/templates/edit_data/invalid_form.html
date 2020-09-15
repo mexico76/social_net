@@ -1,0 +1,7 @@
+{% extends "mainfile.html" %}
+
+{%  block content %}
+    <p>Invalid form</p>
+    <p>Method: {{ method }}. Valid User form: {{ user_form.is_valid }}, SocialUser form{{ social_user_form.is_valid }}</p>
+    {% include 'edit_data/includes/edit_form.html' %}
+{%  endblock %}

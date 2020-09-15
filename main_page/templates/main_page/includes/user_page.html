@@ -1,0 +1,23 @@
+<img src="{{ user.socialuser.main_photo.url }}"><br>
+{{ user.username }}<br>
+{{ user.get_full_name }}<br>
+{% if user.socialuser.birth_date is not None %}
+    {{ user.socialuser.birth_date}}<br>
+{% else %}
+{% endif %}
+{% if user.socialuser.phone_number is not None %}
+    {{ user.socialuser.phone_number }}<br>
+{% else %}
+{% endif %}
+{% if user.socialuser.hobbies is not None %}
+    {{ user.socialuser.hobbies }}<br>
+{% else %}
+{% endif %}
+{% if user.socialuser.school is not None %}
+    {{ user.socialuser.school }}<br>
+{% else %}
+{% endif %}
+{% if user.socialuser.university is not None %}
+    {{ user.socialuser.university }}<br>
+{% else %}
+{% endif %}

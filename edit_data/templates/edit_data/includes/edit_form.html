@@ -1,0 +1,9 @@
+{% if user.is_authenticated %}
+        {% load bootstrap4 %}
+    <form action="{% url 'edit_data' %}" method="post" class="form" enctype="multipart/form-data">
+    {% csrf_token %}
+    {% bootstrap_form user_form size='small' layout='horizontal' %}
+    {% bootstrap_form social_user_form size='small' layout='horizontal' %}
+    {% bootstrap_button "Edit" button_type="submit" button_class="btn-primary" size='small' %}
+    </form>
+    {% endif %}

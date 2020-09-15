@@ -1,0 +1,18 @@
+{% extends "mainfile.html" %}
+
+{#{% load django_bootstrap_breadcrumbs %}#}
+{#{% block breadcrumbs %}#}
+{#    {% breadcrumb "Home" "/"  %}#}
+{#    {% breadcrumb "Edit" "edit/" %}#}
+{#{% endblock %}#}
+
+
+{% block begin %}
+    {% include 'main_page/includes/login_form.html' %}
+{% endblock %}
+
+{% block content %}
+        {% include 'main_page/includes/user_page.html' %}
+{% endblock %}
+
+

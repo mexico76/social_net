@@ -1,0 +1,34 @@
+{% extends 'mainfile.html' %}
+
+{% block content %}
+    {% for message in object_list %}
+        {% if user != message.sender %}
+            {% firstof message.sender as far_user %}
+            {% firstof message.sender.socialuser.main_photo.url as pic %}
+        {% else %}
+            {% firstof message.receiver as far_user %}
+            {% firstof message.sender.socialuser.main_photo.url as pic %}
+        {% endif %}
+        {% if message.reeded_flag == False and user == message.receiver %}
+            <div class="row border mb-1 rounded bg-primary">
+        {% else %}
+            <div class="row border mb-1 rounded bg-light">
+        {% endif %}
+            <div class="col-sm-3">
+                <a class="stretched-link" href="{% url 'send_message' far_user %}"></a>
+                <img style="max-height: 100px; max-width: 100px" src="{{ pic }}">
+                <h5>{{ far_user }}</h5>
+            </div>
+                {% if message.reeded_flag == False and user == message.sender %}
+                    <li style="color: #5b80b2"></li>
+                {% endif %}
+            <div class="col-sm-6">
+                <a class="stretched-link" href="{% url 'send_message' far_user %}"></a>
+
+                <p> {{ message.message_text|truncatechars:20 }}</p>
+                <h6> {{ message.date_time }} </h6>
+            </div>
+        </div>
+    {% endfor %}
+
+{% endblock %}

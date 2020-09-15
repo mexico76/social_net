@@ -1,0 +1,61 @@
+{% extends 'mainfile.html' %}
+
+{% block content %}
+    {% load bootstrap4 %}
+    {% load static %}
+    <h6>Send message from {{ sender.get_full_name }} to {{ receiver.get_full_name }}</h6>
+<div class="overflow-auto rounded border p-2" style="max-height: 300px">
+    {% for message in previos_messages %}
+        {% if message.sender == sender %}
+            <div class="message-row" >
+            <div class="d-flex align-items-center">
+            <div class="message-content bg-secondary rounded p-1">
+                {% if message.delete_flag is False %}
+                    {{ message.message_text }}<br>
+                    {{ message.date_time}}
+                    <form action="{% url 'delete_message' message.pk%}" method="post"
+                          enctype="multipart/form-data" class="form-check-inline">
+                        {% csrf_token %}
+                        <input type="image" src="{% static 'delete_recycle_bin_icon_152203.svg' %}" width="20">
+                    </form>
+                {% else %}
+                    This message was delited<br>
+                    {{ message.date_time}}
+                    <form action="{% url 'restore_message' message.pk %}" method="post"
+                          enctype="multipart/form-data" class="form-check-inline">
+                        {% csrf_token %}
+                        <input type="image" src="{% static 'restore_icon.svg' %}" width="20">
+                    </form>
+                {% endif %}
+            </div>
+            </div>
+            </div><br>
+            <br>
+        {% else %}
+            <div class="message-row">
+            <div class="d-flex align-items-center justify-content-end">
+            <div class="message-content bg-primary text-white rounded p-1">
+                {% if message.delete_flag is False %}
+                    {{ message.message_text }}<br>
+                    {{ message.date_time}}
+                {% else %}
+                    This message was delited<br>
+                    {{ message.date_time}}
+                {% endif %}
+            </div>
+            </div>
+            </div><br>
+        {% endif %}
+    {% endfor %}
+</div>
+    <br>
+    <div class="row">
+    <div class="col-sm-9">
+    <form action="{% url 'send_message' receiver %}" method="post" class="form">
+    {% csrf_token %}
+    {% bootstrap_form message_form size='small' layout='inline' %}
+    {% bootstrap_button "Send" button_type="submit" button_class="btn-primary" size='small' %}
+    </form>
+    </div>
+    </div>
+{% endblock %}
