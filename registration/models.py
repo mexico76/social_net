@@ -12,9 +12,13 @@ def user_main_photo_path(instance, filename):
 class SocialUser(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     birth_date = models.DateField(verbose_name='My Birth Date', blank=True, null=True)
-    phone_number = models.CharField(max_length=12, verbose_name='The number of my phone', blank=True)
+    phone_number = models.CharField(max_length=15, verbose_name='The number of my phone', blank=True)
     hobbies = models.TextField(verbose_name='My hobbies', blank=True)
     school = models.TextField(verbose_name="Schools where I'm studied", blank=True)
     university = models.TextField(verbose_name="My Universities", blank=True)
     main_photo = models.ImageField(verbose_name='My photo', upload_to=user_main_photo_path, blank=True)
 
+    '''
+        Написать функцию добавляющую словарь "страна : [Список городов данной страны]"
+        реализовать выбор страны/города для указания школы и института   
+    '''

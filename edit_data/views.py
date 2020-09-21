@@ -3,6 +3,7 @@ from django.views.generic.base import View
 from django.contrib.auth.models import User
 from registration.models import SocialUser
 from messenger.models import Messages
+import datetime
 
 from .forms import EditDataFormSocialUser, EditDataFormUser
 from .services import edit_user, edit_social_user
@@ -15,7 +16,11 @@ class EditView(View):
         form_user = EditDataFormUser(instance=user)
         form_social_user = EditDataFormSocialUser(instance=social_user)
         not_readed_messages = Messages.objects.filter(receiver=self.request.user, reeded_flag=False).count()
-        context = {'social_user_form':form_social_user, 'user_form':form_user, 'not_readed_messages':not_readed_messages}
+        curent_date = datetime.datetime.now().strftime('%Y-%m-%d')
+        min_date = datetime.datetime.now() - datetime.timedelta(days=(36500+3650))
+        min_date = min_date.strftime('%Y-%m-%d')
+        context = {'social_user_form':form_social_user, 'user_form':form_user, 'not_readed_messages':not_readed_messages,
+                   'curent_date':curent_date, 'min_date': min_date}
         return render(request, 'edit_data/edit.html', context)
 
     def post(self, request):

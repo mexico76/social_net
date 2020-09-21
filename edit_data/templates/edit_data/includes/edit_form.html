@@ -1,9 +1,28 @@
+
 {% if user.is_authenticated %}
         {% load bootstrap4 %}
     <form action="{% url 'edit_data' %}" method="post" class="form" enctype="multipart/form-data">
     {% csrf_token %}
     {% bootstrap_form user_form size='small' layout='horizontal' %}
-    {% bootstrap_form social_user_form size='small' layout='horizontal' %}
+        <div class="form-group row">
+    <label class="col-md-3 col-form-label" for="{{ social_user_form.birth_date.id_for_label }}">
+        {{ social_user_form.birth_date.label }}</label>
+            <div class="col-md-3">
+       <input type="date" value="{{ social_user_form.birth_date.value|date:'Y-m-d' }}" id="{{ social_user_form.birth_date.id_for_label }}"
+            class="form-control form-control-sm form-check-inline" name="{{ social_user_form.birth_date.html_name }}"
+            max="{{ curent_date }}" min="{{ min_date }}" >
+            </div>
+
+    <label class="col-md-3 col-form-label" for="{{ social_user_form.phone_number.id_for_label }}">
+        {{ social_user_form.phone_number.label }}</label>
+            <div class="col-md-3">
+    <input type="text" value="{{ social_user_form.phone_number.value }}" id="{{ social_user_form.phone_number.id_for_label }}"
+           class="form-control form-control-sm form-check-inline"
+           maxlength="15" onkeypress='return event.charCode >= 48 && event.charCode <= 57'
+           placeholder="{{ social_user_form.phone_number.label }}" name="{{ social_user_form.phone_number.html_name }}" >
+            </div>
+        </div>
+    {% bootstrap_form social_user_form exclude='birth_date, phone_number' size='small' layout='horizontal' %}
     {% bootstrap_button "Edit" button_type="submit" button_class="btn-primary" size='small' %}
     </form>
     {% endif %}

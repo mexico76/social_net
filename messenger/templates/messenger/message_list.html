@@ -10,7 +10,7 @@
             {% firstof message.sender.socialuser.main_photo.url as pic %}
         {% endif %}
         {% if message.reeded_flag == False and user == message.receiver %}
-            <div class="row border mb-1 rounded bg-primary">
+            <div class="row border mb-1 rounded" style="background-color: #abdde5">
         {% else %}
             <div class="row border mb-1 rounded bg-light">
         {% endif %}
