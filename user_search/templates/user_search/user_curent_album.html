@@ -1,0 +1,6 @@
+{% extends 'mainfile.html' %}
+
+{% block content %}
+    <a href="{% url 'user_photos' person %}">All photos</a><br>
+    {% include 'user_search/includes/user_photos.html' %}
+{% endblock %}

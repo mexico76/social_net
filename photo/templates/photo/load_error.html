@@ -1,0 +1,9 @@
+{% extends 'mainfile.html' %}
+{% block content %}
+    {% debug %}<br>
+    <h1 class="text-warning">Something Wrong</h1>
+    {{ photos }}<br>
+    {{ add_photo_form.is_valid }}<br>
+    {{ add_photo_form.errors }}<br>
+    {% include 'photo/includes/photo_form.html' %}
+{% endblock %}

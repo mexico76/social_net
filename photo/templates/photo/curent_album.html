@@ -1,0 +1,7 @@
+{% extends 'mainfile.html' %}
+
+{% block content %}
+    <a href="{% url 'all_photo' %}">All photos</a><br>
+    {% include 'photo/includes/photo_form.html' %}
+    {% include 'photo/includes/photos.html' %}
+{% endblock %}

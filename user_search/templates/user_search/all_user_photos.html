@@ -1,0 +1,17 @@
+{% extends 'mainfile.html' %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-sm-4">
+        <a href="{% url 'user_albums' person %}">Albums</a><br>
+        </div>
+    </div><hr>
+    <div class="row">
+    {% for album in albums %}
+        {% include 'user_search/includes/user_albums.html' %}
+    {% endfor %}
+    </div>
+        <hr>
+        {% include 'user_search/includes/user_photos.html' %}
+    {% include 'user_search/includes/pagination.html'%}
+{% endblock %}

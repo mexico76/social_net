@@ -1,0 +1,11 @@
+
+<button id="openClose" class="open-button" onclick="openAlbumForm()">New album</button>
+<div class="form-popup" id="myForm">
+{% load bootstrap4 %}
+    <form action="{% url 'add_album' %}" method="post" class="form-container">
+    {% csrf_token %}
+    {% bootstrap_form album_form %}
+    <button type="submit" class="btn">Create</button>
+    <button type="submit" class="btn cancel" onclick="closeAlbumForm()">Close</button>
+    </form>
+</div>

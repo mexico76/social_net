@@ -1,0 +1,11 @@
+        <figure class="col-lg-3 col-md-4 col-6">
+            <a href="{% url 'user_curent_album' album.owner album.pk %}">
+                {% if album.photos_set.last is not None %}
+                    <img src="{{ album.photos_set.last.photo.url }}" class="img-fluid">
+                {% else %}
+                    {% load static %}
+                    <img src="{% static 'no-image.svg' %}" class="img-fluid">
+                {% endif %}<br>
+                {{ album.album_name }}
+            </a>
+        </figure>

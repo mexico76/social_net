@@ -1,0 +1,10 @@
+{% extends 'mainfile.html' %}
+{% block content %}
+{#    {% load bootstrap4 %}#}
+{#    <form action="{% url 'add_album' %}" method="post" class="form">#}
+{#    {% csrf_token %}#}
+{#    {% bootstrap_form album_form %}#}
+{#    {% bootstrap_button 'Create' %}#}
+{#    </form>#}
+    {% extends 'photo/includes/album_form.html' %}
+{% endblock %}

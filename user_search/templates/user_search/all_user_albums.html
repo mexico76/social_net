@@ -1,0 +1,15 @@
+{% extends 'mainfile.html' %}
+
+{% block content %}
+<div class="row">
+    <div class="col-sm-4">
+        <a href="{% url 'user_photos' person %}">All photos</a>
+    </div>
+</div><br><hr>
+<div class="row">
+    {% for album in object_list %}
+        {% include 'user_search/includes/user_albums.html' %}
+    {% endfor %}
+</div>
+{% include 'user_search/includes/pagination.html' %}
+{% endblock %}

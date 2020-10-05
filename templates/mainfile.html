@@ -10,11 +10,17 @@
       {% load bootstrap4 %}
 	<!-- Bootstrap CSS -->
 
-	<link rel="stylesheet" type="text/css" href={% static "/styles/bootstrap.min.css" %}>
+	<link rel="stylesheet" type="text/css" href={% static "styles/bootstrap.min.css" %}>
+    <link rel="stylesheet" type="text/css" href={% static "styles/jquery.fancybox.min.css" %}>
+    <link rel="stylesheet" type="text/css" href={% static "styles/main.css" %}>
+
       <link rel="shortcut icon" type="image/png" href="{% static "favicon.ico" %}">
-{#      {% load static %}#}
-      <script src={% static "/js/jquery.js" %}></script>
-      <script src={% static "/js/bootstrap.min.js" %}></script>
+      {% load static %}
+      <script src={% static "js/jquery.js" %}></script>
+      <script src="{% static "js/jquery.fancybox.min.js" %}"></script>
+      <script src={% static "js/bootstrap.min.js" %}></script>
+      <script src={% static "js/main.js" %}></script>
+
   </head>
  <body>
 {#header#}
@@ -32,7 +38,7 @@
     </ul>
     <div class="form-inline my-2 my-lg-0">
         {% if user.is_authenticated %}
-            <div class="nav-item"><h6 class="nav-item px-3">{{ user.get_full_name }}</h6></div>
+            <div class="nav-item"><h6 class="nav-item px-3">{{ user.get_full_name|title }}</h6></div>
             <div class="nav-item"><a href="{% url 'logout' %}" class="btn btn-primary btn-sm">Logout</a></div>
         {% else %}
             <div class="nav-item">

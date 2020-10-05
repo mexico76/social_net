@@ -1,0 +1,18 @@
+{% extends 'mainfile.html' %}
+
+{% block content %}
+<div class="row">
+    <div class="col-sm-4">
+        <a href="{% url 'all_photo' %}">All photos</a>
+    </div>
+    <div class="col-sm-4">
+        {% include 'photo/includes/album_form.html' %}
+    </div>
+</div><br><hr>
+<div class="row">
+    {% for album in object_list %}
+        {% include 'photo/includes/albums.html' %}
+    {% endfor %}
+</div>
+
+{% endblock %}

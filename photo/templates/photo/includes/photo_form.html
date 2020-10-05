@@ -1,0 +1,6 @@
+    {% load bootstrap4 %}
+    <form action="{% url 'add_photo' pk %}" method="post" class="md-form" enctype="multipart/form-data">
+    {% csrf_token %}
+    {% bootstrap_form add_photo_form layout='inline' %}
+    {% bootstrap_button 'Load' %}
+    </form>

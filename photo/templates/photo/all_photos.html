@@ -1,0 +1,20 @@
+{% extends 'mainfile.html' %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-sm-4">
+        <a href="{% url 'albums' %}">Albums</a><br>
+        </div>
+        <div class="col-sm-4">
+            {% include 'photo/includes/album_form.html' %}
+        </div>
+    </div><hr>
+    <div class="row">
+    {% for album in albums %}
+       {% include 'photo/includes/albums.html' %}
+    {% endfor %}
+    </div>
+        <hr>
+
+        {% include 'photo/includes/photos.html' %}
+{% endblock %}

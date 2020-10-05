@@ -1,12 +1,12 @@
 <img src="{{ user.socialuser.main_photo.url }}"><br>
-{{ user.username }}<br>
-{{ user.get_full_name }}<br>
+{{ user.username|title }}<br>
+{{ user.get_full_name|title }}<br>
 {% if user.socialuser.birth_date is not None %}
     {{ user.socialuser.birth_date}}<br>
 {% else %}
 {% endif %}
 {% if user.socialuser.phone_number is not None %}
-    {{ user.socialuser.phone_number }}<br>
+    {{ user.socialuser.phone_number|phone2numeric }}<br>
 {% else %}
 {% endif %}
 {% if user.socialuser.hobbies is not None %}
@@ -21,3 +21,8 @@
     {{ user.socialuser.university }}<br>
 {% else %}
 {% endif %}
+<br><hr>
+{% with object_list=photos %}
+    {% include 'photo/includes/photos.html' %}
+{% endwith %}
+<a href="{% url 'all_photo' %}"> See all photo</a>

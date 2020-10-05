@@ -1,21 +1,23 @@
-from django.contrib.auth.models import User
+# from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from django.views.generic.base import View
 from django.contrib.auth import login, logout, authenticate
 from messenger.models import Messages
-
+from photo.models import Photos
 
 from .forms import LoginForm
 
 
 def index(request):
     if request.user.is_authenticated :
+        photos = Photos.objects.filter(album__owner=request.user).order_by('-date_time_add')[:4]
         not_readed_messages = Messages.objects.filter(receiver=request.user, reeded_flag=False).count()
     else:
+        photos = ''
         not_readed_messages = ''
     form = LoginForm()
     user = request.user
-    context = {'form': form, 'user':user, 'not_readed_messages':not_readed_messages}
+    context = {'form': form, 'user':user, 'not_readed_messages':not_readed_messages, 'photos':photos}
     return render(request,'main_page/index.html', context)
 
 class Login(View):

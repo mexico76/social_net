@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'edit_data',
     'user_search',
     'messenger',
+    'photo',
 
     'bootstrap4',
     'django_bootstrap_breadcrumbs',
