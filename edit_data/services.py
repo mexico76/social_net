@@ -1,8 +1,19 @@
 from django.contrib.auth.models import User
 from django.shortcuts import render, HttpResponse
+import datetime
 
+from edit_data.forms import EditDataFormUser, EditDataFormSocialUser
 from registration.models import SocialUser
 
+def get_user_and_create_user_instance_form(request, context):
+    context['user'] = User.objects.get(username=request.user)
+    context['social_user'] = SocialUser.objects.get(user__username=request.user)
+    context['user_form'] = EditDataFormUser(instance=context['user'])
+    context['social_user_form'] = EditDataFormSocialUser(instance=context['social_user'])
+    context['curent_date'] = datetime.datetime.now().strftime('%Y-%m-%d')
+    min_date = datetime.datetime.now() - datetime.timedelta(days=(36500 + 3650))
+    context['min_date'] = min_date.strftime('%Y-%m-%d')
+    return context
 
 def edit_user(user_form, social_user_form, request):
     try:

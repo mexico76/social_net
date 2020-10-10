@@ -15,6 +15,9 @@
     {% endfor %}
     </div>
         <hr>
-
+<div class="row">
+        {% for photo in object_list %}
         {% include 'photo/includes/photos.html' %}
+        {% endfor %}
+</div>
 {% endblock %}

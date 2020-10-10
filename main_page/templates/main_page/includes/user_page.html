@@ -1,4 +1,8 @@
-<img src="{{ user.socialuser.main_photo.url }}"><br>
+<div class="row">
+<div class="col-sm-4 mr-3">
+    <img src="{{ user.socialuser.main_photo.url }}" class="img-fluid"><br>
+</div>
+<div class="col">
 {{ user.username|title }}<br>
 {{ user.get_full_name|title }}<br>
 {% if user.socialuser.birth_date is not None %}
@@ -21,8 +25,13 @@
     {{ user.socialuser.university }}<br>
 {% else %}
 {% endif %}
+</div></div>
 <br><hr>
 {% with object_list=photos %}
+    <div class="row">
+        {% for photo in object_list %}
     {% include 'photo/includes/photos.html' %}
+     {% endfor %}
+</div>
 {% endwith %}
 <a href="{% url 'all_photo' %}"> See all photo</a>

@@ -1,12 +1,32 @@
-# from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
-from django.views.generic.base import View
+from django.views.generic import DetailView
+from django.views.generic.base import View, TemplateView
+from django.views.generic.list import ListView
 from django.contrib.auth import login, logout, authenticate
+
+
 from messenger.models import Messages
 from photo.models import Photos
 
 from .forms import LoginForm
 
+class MainView(TemplateView):
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data()
+        context['not_readed_messages'] = Messages.objects.filter(receiver=self.request.user, reeded_flag=False).count()
+        return context
+
+class MainListView(ListView):
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data()
+        context['not_readed_messages'] = Messages.objects.filter(receiver=self.request.user, reeded_flag=False).count()
+        return context
+
+class MainDetailView(DetailView):
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data()
+        context['not_readed_messages'] = Messages.objects.filter(receiver=self.request.user, reeded_flag=False).count()
+        return context
 
 def index(request):
     if request.user.is_authenticated :

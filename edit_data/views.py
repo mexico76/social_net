@@ -1,27 +1,18 @@
 from django.shortcuts import render, redirect
-from django.views.generic.base import View
-from django.contrib.auth.models import User
-from registration.models import SocialUser
 from messenger.models import Messages
-import datetime
 
+from main_page.views import MainView
 from .forms import EditDataFormSocialUser, EditDataFormUser
-from .services import edit_user, edit_social_user
+from .services import edit_user, edit_social_user, get_user_and_create_user_instance_form
 
 
-class EditView(View):
-    def get(self, request):
-        user = User.objects.get(username=request.user)
-        social_user = SocialUser.objects.get(user__username=request.user)
-        form_user = EditDataFormUser(instance=user)
-        form_social_user = EditDataFormSocialUser(instance=social_user)
-        not_readed_messages = Messages.objects.filter(receiver=self.request.user, reeded_flag=False).count()
-        curent_date = datetime.datetime.now().strftime('%Y-%m-%d')
-        min_date = datetime.datetime.now() - datetime.timedelta(days=(36500+3650))
-        min_date = min_date.strftime('%Y-%m-%d')
-        context = {'social_user_form':form_social_user, 'user_form':form_user, 'not_readed_messages':not_readed_messages,
-                   'curent_date':curent_date, 'min_date': min_date}
-        return render(request, 'edit_data/edit.html', context)
+class EditView(MainView):
+    template_name = 'edit_data/edit.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data()
+        get_user_and_create_user_instance_form(self.request, context)
+        return context
 
     def post(self, request):
         user_form = EditDataFormUser(request.POST)
@@ -35,3 +26,4 @@ class EditView(View):
             context = {'method':request.method, 'user_form':user_form,
                        'social_user_form':social_user_form,  'not_readed_messages':not_readed_messages}
             return render(request, 'edit_data/invalid_form.html', context)
+

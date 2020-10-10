@@ -38,4 +38,16 @@ def make_messages_reeded_when_open(request, user):
         message.reeded_flag = True
         message.save()
 
+def delete_restore_message(pk, bool):
+    message = Messages.objects.get(pk=pk)
+    message.delete_flag = bool
+    message.save()
+    return message.receiver.username
+
+def create_message(request, message_form, user):
+    if message_form.is_valid() and request.method == 'POST':
+        create_message = Messages.objects.create(sender=request.user, receiver=User.objects.get(username=user),
+                                                 message_text=message_form.cleaned_data.get('message_text'))
+        create_message.save()
+
 
