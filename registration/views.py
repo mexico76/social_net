@@ -14,7 +14,7 @@ class RegistrationView(View):
     def post(self, request):
         reg_form = RegistrationForm(request.POST, request.FILES)
         if request.method == 'POST' and reg_form.is_valid():
-            user = create_new_user(reg_form, request)
+            user = create_new_user(reg_form)
             create_new_social_user(user, request, reg_form)
             new_user_auto_loging(reg_form, request)
             return redirect('index')

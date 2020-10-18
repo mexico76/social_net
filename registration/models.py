@@ -17,8 +17,3 @@ class SocialUser(models.Model):
     school = models.TextField(verbose_name="Schools where I'm studied", blank=True)
     university = models.TextField(verbose_name="My Universities", blank=True)
     main_photo = models.ImageField(verbose_name='My photo', upload_to=user_main_photo_path, blank=True)
-
-    '''
-        Написать функцию добавляющую словарь "страна : [Список городов данной страны]"
-        реализовать выбор страны/города для указания школы и института   
-    '''
