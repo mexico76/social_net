@@ -9,6 +9,7 @@ def user_main_photo_path(instance, filename):
     filename = f"{instance.user}-{datetime.datetime.now().strftime('%d.%m.%y %H:%M')}.{ext}"
     return os.path.join(f'registration/main_photos/{instance.user}', filename)
 
+
 class SocialUser(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     birth_date = models.DateField(verbose_name='My Birth Date', blank=True, null=True)

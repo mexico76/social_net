@@ -1,4 +1,6 @@
 from django.contrib.auth.models import User
+from django.contrib.sessions.middleware import SessionMiddleware
+from django.contrib.auth.middleware import AuthenticationMiddleware
 from django.test import TestCase, RequestFactory
 from SocialNet.settings import BASE_DIR
 from registration.forms import RegistrationForm
@@ -35,6 +37,11 @@ class RegistrationFormTest(TestCase):
     def make_reg_form(self, user):
         factory = RequestFactory()
         request = factory.post(path='/registration', data=user)
+        session_middleware = SessionMiddleware()
+        session_middleware.process_request(request)
+        authenticated_middleware = AuthenticationMiddleware()
+        authenticated_middleware.process_request(request)
+        request.session.save()
         reg_form = RegistrationForm(request.POST, request.FILES)
         return reg_form, request
 

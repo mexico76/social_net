@@ -1,9 +1,5 @@
-from django.shortcuts import render, redirect
-from django.views.generic.base import View
-
 from main_page.views import MainListView, MainView
 from .models import Photos, Album
-from messenger.models import Messages
 from .forms import CreateAlbumForm, LoadPhotosForm
 from .services import last_albums, add_album, add_photo
 
@@ -45,7 +41,6 @@ class AddAlbumView(MainView):
         return add_album(form, request)
 
 class AddPhotoToAlbumView(MainView):
-    # template_name = 'photo/load_error.html'
     def post(self, request, pk):
         add_photo_form = LoadPhotosForm(request.POST, request.FILES)
         photos = request.FILES.getlist('photo')

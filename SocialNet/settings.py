@@ -27,7 +27,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -137,5 +136,7 @@ STATICFILES_DIRS = [
 ]
 MEDIA_URL = '/_media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, "_media")
+
+THUMB_SIZE = (160, 100)
 
 

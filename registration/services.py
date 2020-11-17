@@ -1,5 +1,4 @@
 from django.contrib.auth.models import User
-from django.shortcuts import render
 from django.contrib.auth import authenticate, login
 
 from .models import SocialUser
@@ -34,4 +33,7 @@ def new_user_auto_loging(reg_form, request):
     new_user = authenticate(username=reg_form.cleaned_data['user_login'],
                             password=reg_form.cleaned_data['user_password'],
                             )
-    login(request, new_user)
+    if new_user is not None:
+        sing_in = login(request, new_user)
+        return sing_in
+    else:return 'there is no user'
