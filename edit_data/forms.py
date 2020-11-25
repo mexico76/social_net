@@ -9,7 +9,14 @@ class EditDataFormUser(forms.ModelForm):
     email = forms.EmailField(required=True)
     class Meta:
         model = User
-        fields = ['first_name', 'last_name', 'email']
+        fields = ['first_name', 'last_name', 'email', 'username']
+        widgets = {'username': forms.HiddenInput()}
+
+    def clean(self):
+        email = self.cleaned_data.get('email')
+        if User.objects.filter(email=email).exclude(username=self.cleaned_data.get('username')).exists():
+            raise ValidationError("Email exists")
+        return self.cleaned_data
 
 
 class EditDataFormSocialUser(forms.ModelForm):

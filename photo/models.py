@@ -66,7 +66,7 @@ class Photos(models.Model):
 
         # set save=False, otherwise it will run in an infinite loop
         self.thumbnail.save(thumb_filename, ContentFile(temp_thumb.read()), save=False)
-        # temp_thumb.close()
+        temp_thumb.close()
 
         return True
 
